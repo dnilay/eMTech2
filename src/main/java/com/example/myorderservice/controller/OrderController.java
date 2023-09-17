@@ -1,10 +1,7 @@
 package com.example.myorderservice.controller;
 
 import com.example.myorderservice.Order;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,23 @@ private List<Order> list=null;
     public Order createOrder(@RequestBody Order order)
     {
         list.add(order);
+        return order;
+    }
+
+    @GetMapping("/orders/{orderId}")
+    public Order getOrderById(@PathVariable("orderId") int orderId)
+    {
+        Order order=null;
+        for(Order o: list)
+        {
+            if(o.getOrderId()==orderId)
+            {
+                order=o;
+
+                break;
+            }
+
+        }
         return order;
     }
 
